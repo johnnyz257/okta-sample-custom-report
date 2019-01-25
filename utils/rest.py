@@ -1,6 +1,5 @@
 import os
 import requests
-import json
 
 
 class OktaUtil:
@@ -22,21 +21,6 @@ class OktaUtil:
 
         self.REST_HOST = os.environ["OKTA_ORG_URL"]
         self.REST_TOKEN = os.environ["OKTA_API_TOKEN"]
-        self.OIDC_CLIENT_ID = os.environ["OKTA_APP_CLIENT_ID"]
-        self.OIDC_CLIENT_SECRET = os.environ["OKTA_APP_CLIENT_SECRET"]
-        self.OIDC_REDIRECT_URL = os.environ["OKTA_OIDC_REDIRECT_URL"]
-        if "OIDC_CLIENT_ID" in os.environ:
-            self.OIDC_CLIENT_ID = os.environ["OIDC_CLIENT_ID"]
-
-        if "OIDC_CLIENT_SECRET" in os.environ:
-            self.OIDC_CLIENT_SECRET = os.environ["OIDC_CLIENT_SECRET"]
-
-        if "OIDC_REDIRECT_URL" in os.environ:
-            self.OIDC_REDIRECT_URL = os.environ["OIDC_REDIRECT_URL"]
-
-        if "OKTA_AUTHSERVER_ID" in os.environ:
-            self.AUTH_SERVER_ID = os.environ["OKTA_AUTHSERVER_ID"]
-            print("HAS AUTH SERVER: {0}".format(self.AUTH_SERVER_ID))
 
         user_agent = ""
         if "User-Agent" in headers:
@@ -57,17 +41,6 @@ class OktaUtil:
 
         if "X-Forwarded-Proto" in headers:
             self.OKTA_HEADERS["X-Forwarded-Proto"] = headers["X-Forwarded-Proto"]
-
-        self.OKTA_OAUTH_HEADERS = {
-            "Accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": "Basic {encoded_auth}".format(
-                encoded_auth=self.get_encoded_auth(
-                    client_id=self.OIDC_CLIENT_ID,
-                    client_secret=self.OIDC_CLIENT_SECRET))
-        }
-
-        print("OKTA_OAUTH_HEADERS: {0}".format(json.dumps(self.OKTA_OAUTH_HEADERS, indent=4, sort_keys=True)))
 
     def get_o365_groups(self):
         print("get_o365_groups")

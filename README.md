@@ -16,6 +16,13 @@ You can run all the dependencies via the requirements.txt
 ## How to Run
 
 NOTE: You may need to configure ports to listen to for serviing up the site
+Besure to set these environment variables first
+
+`OKTA_ORG_URL` Your Okta Org URL formatted like this "https://<my okta org>.okta.com"
+
+`OKTA_API_TOKEN` The APi Token you created in your Okta org
+
+Run the app
 
 `python3 app.py`
 
